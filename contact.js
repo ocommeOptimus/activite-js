@@ -6,9 +6,10 @@ function addContact(name, phone, email) {
 }
 
 function arrayList() {
-  var liste = ""
-  for (var i = 0; i < contacts.lenght; i++) {
-    liste += contacts[i].nom
+  var list = ""
+  for (var x = 0; x < contacts.length; x++) {
+    list += contacts[x].nom
+    return "contact n° " + x + " : " + list
   }
 }
 
@@ -21,25 +22,25 @@ function editContact(name, phone, email) {
   contacts.splice(i, 1, newContact)
 }
 
-function searchContact(searchValue) {
-  var searchValue = prompt('Saisissez votre recherche')
-  if ([contacts.nom].includes(searchValue)) {
-    alert('Contact existant')
-  }
-  if ([contacts.phone].includes(searchValue)) {
-    alert('Contact existant')
-  }
-  if ([contacts.email].includes(searchValue)) {
-    alert('Contact existant')
-  }
-  else {
-    alert('Aucun contact lié à votre recherche')
-  }
+function deleteContact(contactIndex) {
+  prompt('Choississez parmis vos contacts :\n' + arrayList())
+  var contactIndex = promptNumber("Quel est le contact à supprimer ?")
+  contacts.pop(contacts[contactIndex])
 }
 
-function deleteContact(contactIndex) {
-  var contactIndex = Number(prompt("Quel est le contact à supprimer ?"))
-  contacts.pop(contacts[contactIndex])
+function searchContact(searchValue) {
+  var searchValue = prompt('Saisissez votre recherche')
+  var secondList = ""
+  for (var y = 0; y < contacts.length; y++) {
+    if ([contacts[y].nom].includes(searchValue) || [contacts[y].telephone].includes(searchValue) || [contacts[y].email].includes(searchValue)) {
+      alert('Contact existant')
+      secondList += contacts[y].nom + " / " + contacts[y].telephone + " / " + contacts[y].email
+      alert("contact n° " + y + " : " + secondList)
+    }
+    else {
+      alert('Aucun contact lié à votre recherche')
+    }
+  }
 }
 
 function choosing() {
@@ -66,12 +67,12 @@ function choosing() {
         alert('Vous vous apprétez à modifier un contact')
         editContact()
         alert('Contact modifié')
-        break
+        choosing()
     case 3:
         alert('Vous vous apprétez à supprimer un contact')
         deleteContact()
         alert('Contact supprimé')
-        break
+        choosing()
     case 4:
         searchContact()
         choosing()
